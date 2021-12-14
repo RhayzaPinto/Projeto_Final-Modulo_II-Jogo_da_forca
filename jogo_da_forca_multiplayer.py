@@ -1,45 +1,41 @@
 import random
-
-
-aleatorias = ["Sintaxe", "Sequência", "Estritamente", "concatenação", "unária", "Inteligência", "Respeito",
-              "Teclado", "Software", "Aprendizado", "Identação", "Algoritmo", "Programação", "Autoconhecimento",
-              "Condicional", "Webnar", "Hardware", "Desenvolvimento", "Atribuição", "Escopo", "marisa"]
+from palavras_e_dicas import palavraAleatoria, dicaAleatoria
 
 fim_do_jogo = False
 
 lista_jogadores = []
 
-
 def pegar_quantidade_de_jogadores():
     while True:
-        quantidade_jogadores = int(input('quantas pessoas vão jogar ?'))
+        quantidade_jogadores = int(input('Digite a quantidade de jogadores: '))
         if 2 <= quantidade_jogadores <= 5:
             return quantidade_jogadores
-        print('digite uma opção válida.')
+        print('Digite uma opção válida.')
 
 def pegar_nome_dos_jogadores(quantidade_jogadores):
     for i in range(quantidade_jogadores):
-        nome_do_jogador = input('Digite o nome do jogador')
+        nome_do_jogador = input('Digite o nome do jogador: ')
         lista_jogadores.append({'jogador':nome_do_jogador, 'erro': 0})
     return lista_jogadores
 
+def escolher_palavra_e_dica():
+    index = int(random.randint(0, 20))
+    palavra_secreta = palavraAleatoria(index)
+    dica = dicaAleatoria(index) 
+    return palavra_secreta, dica
 
-def escolher_palavra_aleatoria():   #Função que escolhe uma palavra aleatória (random.choice) no banco de palavras
-    palavra1 = random.choice(aleatorias)
-    return palavra1
-
-def atribuir_palavra_jogador():
+def atribuir_palavra_e_dica_jogador():
     for i in range(len(lista_jogadores)):
-        lista_jogadores[i].update(palavra_secreta=escolher_palavra_aleatoria())
-
+        palavra_e_dica = escolher_palavra_e_dica()
+        lista_jogadores[i].update(palavra_secreta = palavra_e_dica[0], dica = palavra_e_dica[1])
 
 def pegar_opcao_jogador():
     while True:
-        opcao = int(input("Selecione uma opção\n 1 - ler a historia do jogo \n 2 - "
-                        "escolher quantidade de jogadores \nDigite 1 ou 2 :"))
+        opcao = int(input("Selecione uma opção\n 1- Ler a história do jogo \n 2- "
+                        "Escolher a quantidade de jogadores \nDigite 1 ou 2: "))
         if 1 <= opcao <= 2:
             return opcao
-        print('digite uma opção válida')
+        print('Digite uma opção válida')
 
 def selecao_jogo(opcao):
     if opcao == 1:
@@ -48,9 +44,8 @@ def selecao_jogo(opcao):
     elif opcao == 2:
         quantidades_de_jogadores = pegar_quantidade_de_jogadores()
         nome_jogadores = pegar_nome_dos_jogadores(quantidades_de_jogadores)
-        atribuir_palavra_jogador()
+        atribuir_palavra_e_dica_jogador()
         print(nome_jogadores)
-
 
 def historia_do_jogo():
     print(" _    _   _   _   _     _____   _   _____   ______   _____   ____   _____")
@@ -75,12 +70,11 @@ def historia_do_jogo():
     opcao_jogador = pegar_opcao_jogador()
     selecao_jogo(opcao_jogador)
 
-
-def pegarletra():
-    chute = input("Qual letra?").upper().strip()
+def pegar_letra():
+    chute = input("Digite uma letra: ").upper().strip()
     return chute
 
-def letrasacertadas():
+def letras_acertadas():
     for i in range(len(lista_jogadores)):
         palavradavez = lista_jogadores[i]['palavra_secreta']
         letras_acertadas = ["_"]* (len(palavradavez))
@@ -94,7 +88,6 @@ def perdeu():
     print()
     fim_do_jogo = True
 
-
 def ganhou():
     global fim_do_jogo
     global vez
@@ -104,17 +97,15 @@ def ganhou():
     print()
     fim_do_jogo = True
 
-
-
-
-def rodarforca():
+def rodar_forca():
     global fim_do_jogo
     vez = 0
 
 
     while fim_do_jogo == False:
         print(lista_jogadores[vez]['letras_acertadas'])
-        chute = pegarletra()
+        print(f"Dica: {lista_jogadores[vez]['dica']}")
+        chute = pegar_letra()
         palavradavez = lista_jogadores[vez]['palavra_secreta']
         if chute in palavradavez.upper():
             index = 0
@@ -143,22 +134,9 @@ def rodarforca():
                 if vez >= len(lista_jogadores):
                     vez = 0
 
-
-
-
-
-
-
-
-
 def jogar():
     opcao_jogador = pegar_opcao_jogador()
     selecao_jogo(opcao_jogador)
-    letrasacertadas()
-    rodarforca()
+    letras_acertadas()
+    rodar_forca()
 jogar()
-
-
-
-
-
