@@ -59,7 +59,7 @@ def desenha_forca(erros):
 def pegar_quantidade_de_jogadores():
     while True:
         quantidade_jogadores = int(input('Digite a quantidade de jogadores: '))
-        if 2 <= quantidade_jogadores <= 5:
+        if 1 <= quantidade_jogadores <= 10:
             return quantidade_jogadores
         print('Digite uma opção válida.')
 
