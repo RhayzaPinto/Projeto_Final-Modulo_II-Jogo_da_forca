@@ -153,6 +153,7 @@ def rodar_forca():
 
 
     while fim_do_jogo == False:
+        print(f'Agora é a vez de: {lista_jogadores [vez]["jogador"]}')
         print(lista_jogadores[vez]['letras_acertadas'])
         print(f"Dica: {lista_jogadores[vez]['dica']}")
         chute = pegar_letra()
