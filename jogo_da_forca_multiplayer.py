@@ -1,10 +1,18 @@
 import random
 from palavras_e_dicas import palavraAleatoria, dicaAleatoria
-import unidecode 
+import os
+import time
+import unidecode
 
 fim_do_jogo = False
 
 lista_jogadores = []
+
+def clear():
+    if os.name == 'nt':
+        _ = os.system('cls')
+    else:
+        _ = os.system('clear')
 
 def desenha_forca(erros):
     print("  _______     ")
@@ -106,7 +114,7 @@ def historia_do_jogo():
     print('SEJAM BEM VINDOS AO JOGO DA FORCA:')
     print('=' * 150)
     print('As origens do JOGO DA FORCA são obscuras, significando não descoberto, mas parece ter surgido na época vitoriana ”, ')
-    print('diz Tony Augarde, autor de The Oxford Guide to Word Games.')
+    print('diz Tony Aguarde, autor de The Oxford Guide to Word Games.')
     print('O jogo é mencionado em “Jogos tradicionais” de Alice Bertha Gomme em 1894 sob o nome de “Pássaros,')
     print('feras e peixes”. As regras são simples; um jogador escreve a primeira e a')
     print('última letras de uma palavra e outro jogador adivinha as letras intermediárias. Em outras fontes,')
@@ -175,6 +183,8 @@ def rodar_forca():
         else:
             print(f'você errou, vez do próximo jogador')
             lista_jogadores[vez]['erro'] += 1
+            time.sleep(1)
+            clear()
             desenha_forca(lista_jogadores[vez]["erro"])
             if lista_jogadores[vez]['erro'] == 6:
                 print('você perdeu playboy')
