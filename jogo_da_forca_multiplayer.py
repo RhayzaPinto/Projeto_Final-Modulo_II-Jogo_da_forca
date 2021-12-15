@@ -5,6 +5,56 @@ fim_do_jogo = False
 
 lista_jogadores = []
 
+def desenha_forca(erros):
+    print("  _______     ")
+    print(" |/      |    ")
+
+    if(erros == 1):
+        print(" |      (_)   ")
+        print(" |            ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 2):
+        print(" |      (_)   ")
+        print(" |      \     ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 3):
+        print(" |      (_)   ")
+        print(" |      \|    ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 4):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 5):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |            ")
+
+    if(erros == 6):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      /     ")
+
+    if (erros == 7):
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      / \   ")
+
+    print(" |            ")
+    print("_|___         ")
+    print()
+
 def pegar_quantidade_de_jogadores():
     while True:
         quantidade_jogadores = int(input('Digite a quantidade de jogadores: '))
@@ -123,6 +173,7 @@ def rodar_forca():
         else:
             print(f'você errou, vez do próximo jogador')
             lista_jogadores[vez]['erro'] += 1
+            desenha_forca(lista_jogadores[vez]["erro"])
             if lista_jogadores[vez]['erro'] == 6:
                 print('você perdeu playboy')
                 print(f' A Palavra era {lista_jogadores[vez]["palavra_secreta"]}')
