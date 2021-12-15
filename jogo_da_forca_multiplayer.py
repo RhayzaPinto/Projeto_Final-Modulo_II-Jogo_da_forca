@@ -17,6 +17,12 @@ def clear():
 def desenha_forca(erros):
     print("  _______     ")
     print(" |/      |    ")
+    
+    if(erros == 0):
+        print(" |            ")
+        print(" |            ")
+        print(" |            ")
+        print(" |            ")
 
     if(erros == 1):
         print(" |      (_)   ")
@@ -162,6 +168,7 @@ def rodar_forca():
 
     while fim_do_jogo == False:
         print(f'Agora é a vez de: {lista_jogadores [vez]["jogador"]}')
+        desenha_forca(lista_jogadores[vez]["erro"])
         print(lista_jogadores[vez]['letras_acertadas'])
         print(f"Dica: {lista_jogadores[vez]['dica']}")
         chute = pegar_letra()
@@ -184,9 +191,8 @@ def rodar_forca():
             print(f'você errou, vez do próximo jogador')
             lista_jogadores[vez]['erro'] += 1
             time.sleep(1)
-            clear()
-            desenha_forca(lista_jogadores[vez]["erro"])
-            if lista_jogadores[vez]['erro'] == 6:
+            clear()            
+            if lista_jogadores[vez]['erro'] == 7:
                 print('você perdeu playboy')
                 print(f' A Palavra era {lista_jogadores[vez]["palavra_secreta"]}')
 
