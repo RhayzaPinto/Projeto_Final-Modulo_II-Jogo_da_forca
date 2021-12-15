@@ -44,8 +44,7 @@ def selecao_jogo(opcao):
     elif opcao == 2:
         quantidades_de_jogadores = pegar_quantidade_de_jogadores()
         nome_jogadores = pegar_nome_dos_jogadores(quantidades_de_jogadores)
-        atribuir_palavra_e_dica_jogador()
-        print(nome_jogadores)
+        atribuir_palavra_e_dica_jogador()        
 
 def historia_do_jogo():
     print(" _    _   _   _   _     _____   _   _____   ______   _____   ____   _____")
