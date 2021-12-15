@@ -2,6 +2,7 @@ import random
 from palavras_e_dicas import palavraAleatoria, dicaAleatoria
 import os
 import time
+import unidecode
 
 fim_do_jogo = False
 
@@ -66,7 +67,7 @@ def desenha_forca(erros):
 def pegar_quantidade_de_jogadores():
     while True:
         quantidade_jogadores = int(input('Digite a quantidade de jogadores: '))
-        if 1 <= quantidade_jogadores <= 5:
+        if 1 <= quantidade_jogadores <= 10:
             return quantidade_jogadores
         print('Digite uma opção válida.')
 
@@ -160,15 +161,16 @@ def rodar_forca():
 
 
     while fim_do_jogo == False:
+        print(f'Agora é a vez de: {lista_jogadores [vez]["jogador"]}')
         print(lista_jogadores[vez]['letras_acertadas'])
         print(f"Dica: {lista_jogadores[vez]['dica']}")
         chute = pegar_letra()
         palavradavez = lista_jogadores[vez]['palavra_secreta']
-        if chute in palavradavez.upper():
+        if chute in unidecode.unidecode(palavradavez.upper()):
             index = 0
             for letra in palavradavez:
 
-                if chute == letra.upper():
+                if chute == unidecode.unidecode(letra.upper()):
                     lista_jogadores[vez]['letras_acertadas'][index] = letra
 
                 index = index + 1
