@@ -1,5 +1,6 @@
 import random
 from palavras_e_dicas import palavraAleatoria, dicaAleatoria
+import unidecode 
 
 fim_do_jogo = False
 
@@ -156,11 +157,11 @@ def rodar_forca():
         print(f"Dica: {lista_jogadores[vez]['dica']}")
         chute = pegar_letra()
         palavradavez = lista_jogadores[vez]['palavra_secreta']
-        if chute in palavradavez.upper():
+        if chute in unidecode.unidecode(palavradavez.upper()):
             index = 0
             for letra in palavradavez:
 
-                if chute == letra.upper():
+                if chute == unidecode.unidecode(letra.upper()):
                     lista_jogadores[vez]['letras_acertadas'][index] = letra
 
                 index = index + 1
