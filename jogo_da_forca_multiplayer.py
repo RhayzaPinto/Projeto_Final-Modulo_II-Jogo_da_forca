@@ -135,8 +135,11 @@ def historia_do_jogo():
     selecao_jogo(opcao_jogador)
 
 def pegar_letra():
-    chute = input("Digite uma letra: ").upper().strip()
-    return chute
+    while True:
+        chute = input("Digite uma letra: ").upper().strip()
+        if chute.isalpha():
+            return chute
+        print('Você deve digitar uma letra!')
 
 def letras_acertadas():
     for i in range(len(lista_jogadores)):
